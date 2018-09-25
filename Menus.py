@@ -1,17 +1,23 @@
 # this file contains the code for app menus
+# author: abhijit raj
+
 from abc import ABC, abstractmethod
 import json
 from logos import LOGOS
 
 
-# an abstract menu class
 class Menu(ABC):
+    '''
+    This is an abstract menu class that other menus will inherit from.
+    '''
     @abstractmethod
     def display(self):
         pass
 
-# the main menu
 class MainMenu(Menu):
+    '''
+    Main Menu will be visible when the user starts the app
+    '''
     def display(self):
         print(LOGOS["mainmenu"])
         print(" " * 30 + "Your #1 Travel Website")
@@ -21,34 +27,44 @@ class MainMenu(Menu):
         print('2 to register')
         print('3 to read FAQ')
 
-        self.getUserChoice()
-
     def getUserChoice(self):
+        '''
+        returns the action taken by the user
+        '''
         userChoice = input('Enter your choice: ')
         return userChoice
 
 # the login menu
 class Login(Menu):
+
     def display(self):
         print(LOGOS["login"])
         print('*' * 100)
-        self.getLoginDetails()
+
     def getLoginDetails(self):
+        '''Takes the username and password inputs and returns them '''
         username = input('Enter your username: ')
         password = input('Enter your password: ')
         return username, password
 
-# the register menu
+
 class Register(Menu):
+    '''
+    This class displays the register menu for the user.
+    Two types of users can register from this menu:
+    1 - customer who can book tickets on our platform
+    2 - companies who will provide services (either air or bus. rail services are fixed)
+    '''
     def display(self):
         print(LOGOS["register"])
         print("*" * 100)
-        self.signUp()
 
     def checkExistingRecord(self, property, val, userType):
-        # checks if user with property already exists
-        # returns true if user with property exists
-        # property can be email or username
+        '''
+        checks if a user with given property already exists.
+        returns True when such a user is found.
+        '''
+
         if userType is '1':
             # check in customer database
             data = json.load(open('customerData.json', 'r'))
@@ -69,6 +85,9 @@ class Register(Menu):
             return False
 
     def isValidPhoneNumber(self, phone):
+        '''
+        returns True if the phone number entered is valid
+        '''
         digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
         for i in phone:
             if (i not in digits):
@@ -79,8 +98,11 @@ class Register(Menu):
         return True
 
     def registerCustomer(self):
-        #helper function for signUp
-        # returns all the valid input data
+        '''
+        Helper function for signUp function.
+        Used to input and validate data from a new customer.
+        returns a tuple containing all the valid customer data.
+        '''
         username = input('Enter your username: ')
         # check no such user exists
         while (self.checkExistingRecord("username", username, '1')):
@@ -106,6 +128,11 @@ class Register(Menu):
         return username, email, password, gender, phone
 
     def registerCompany(self):
+        '''
+        Helper function for signUp function.
+        Used to input and validate data from a new company.
+        returns a tuple containing all the valid company data.
+        '''
         companyName = input('Enter the name of your company: ').upper()
         while self.checkExistingRecord("companyName", companyName, '2'):
             companyName = input('Sorry, that company is already registered in the system. Try another: ').upper()
@@ -128,11 +155,11 @@ class Register(Menu):
         if (userType == '1'):
             # customer
             newCustomerDetails = self.registerCustomer()
-            return newCustomerDetails
+            return userType, newCustomerDetails
         elif (userType == '2'):
             # company
             newCompanyDetails = self.registerCompany()
-            return newCompanyDetails
+            return userType, newCompanyDetails
 
 
 
