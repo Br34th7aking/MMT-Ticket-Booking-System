@@ -44,8 +44,12 @@ class Customer(User):
 
 
 class Company(User):
-    def __init__(self, companyName, serviceType, helpline, memberSince, discountCoupons):
-        pass
+    def __init__(self, companyName, serviceType, helpline, memberSince):
+        self.companyName = companyName
+        self.serviceType = serviceType
+        self.helpline = helpline
+        self.memberSince = memberSince
+        self.discountCoupons = []
     def viewProfile(self):
         pass
     def addCoupon(self):
@@ -54,7 +58,9 @@ class Company(User):
         pass
     def changeFare(self):
         pass
-
+    def createDict(self):
+        '''returns a dictionary containing company attributes '''
+        return self.__dict__
 class Admin(User):
     def viewProfile(self):
         pass

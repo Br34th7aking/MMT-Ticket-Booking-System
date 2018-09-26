@@ -144,6 +144,12 @@ class Register(Menu):
         serviceType = input('What travel services do you offer? 1 for air, 2 for bus: ')
         while(serviceType is not '1' and serviceType is not '2'):
             serviceType = input('Invalid input. Please enter 1 for air, 2 for bus: ')
+        if (serviceType is '1'):
+            serviceType = 'AIR'
+        elif serviceType is '2':
+            serviceType = 'BUS'
+        else:
+            serviceType = 'RAIL' # this is fixed for IRCTC only 
 
         helpline = input('Enter your 10-digit helpline number: ')
         while not self.isValidPhoneNumber(helpline):

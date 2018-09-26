@@ -1,9 +1,1 @@
-[
-  {
-    "companyName": "IRCTC",
-    "serviceType": "Rail",
-    "helpline": "755 661 0661",
-    "memberSince": "2018-09-26",
-    "discountCoupons": []
-  }
-]
+[{"companyName": "IRCTC", "serviceType": "RAIL", "helpline": "755 661 0661", "memberSince": "2018-09-26", "discountCoupons": []}, {"companyName": "VISTARA", "serviceType": "AIR", "helpline": "9289228888", "memberSince": "2018-09-26", "discountCoupons": []}]

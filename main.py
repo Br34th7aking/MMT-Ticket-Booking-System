@@ -39,12 +39,26 @@ elif userChoice is '2':
         customerDict = customer.createDict()
         file = open("customerData.json", "r")
         data = json.load(file)
+        file.close()
         data.append(customerDict)
         file = open("customerData.json", "w")
         json.dump(data, file)
+        file.close()
     elif userType == '2':
         # create a new company and add to company database
-        pass
+        companyName = signUpData[0]
+        serviceType = signUpData[1]
+        helpline = signUpData[2]
+        memberSince = str(date.today())
+        company = Company(companyName, serviceType, helpline, memberSince)
+        companyDict = company.createDict()
+        file = open("companyData.json", "r")
+        data = json.load(file)
+        file.close()
+        data.append(companyDict)
+        file = open("companyData.json", "w")
+        json.dump(data, file)
+        file.close()
 elif userChoice is '3':
     # display the FAQ
     pass
