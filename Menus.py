@@ -182,35 +182,45 @@ class Register(Menu):
 
 class CustomerDashboard(Menu):
     '''displayed to a customer after they login'''
-    def display(self):
+    def display(self, username):
         print(LOGOS['home'])
         print('*' * 10 + "Customer Dashboard" + '*' * 10)
+        print('\n')
+        print('Hello {}, select one option from below: '.format(username))
         print('Enter 1 to book a flight.')
         print('Enter 2 to book a train ticket.')
         print('Enter 3 to book a bus ticket.')
         print('Enter 4 to view your profile. ')
-        print('Enter 5 to update profile.')
+        print('Enter 5 to change password.')
         print('Enter 6 to view booking history.')
         print('Enter 7 to view cancelled tickets. ')
         print('Enter 8 to view last transaction.')
         print('Enter 9 to log out.')
 
-    def getUserChoice():
+    def getUserChoice(self):
         userChoice = input('Your choice: ')
         return userChoice
 
 class CompanyDashboard(Menu):
     '''displayed to a company after they login'''
     def display(self):
-        pass
-
+        print(LOGOS['home'])
+        print("*" * 50)
+        print("Enter 1 to view your profile. ")
+        print("Enter 2 to add coupons. ")
+        print("Enter 3 to view coupons you currently offer. ")
+        print("Enter 4 to remove a coupon. ")
+        print("Enter 5 to log out. ")
+    def getUserChoice(self):
+        userChoice = input('Your choice: ')
+        return userChoice
 class AdminDashboard(Menu):
     '''displayed to the admin after they login'''
     def display(self):
         pass
 #test
-m = MainMenu()
-m.display()
+# m = MainMenu()
+# m.display()
 # l = Login()
 # l.display()
 # r = Register()
