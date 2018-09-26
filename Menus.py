@@ -117,9 +117,9 @@ class Register(Menu):
         while(len(password) < 6):
             password = input('Weak password. Enter minimum 6 characters: ')
 
-        gender = input('Enter your gender. 1 for male, 2 for female: ')
-        while(gender is not '1' and gender is not '2'):
-            gender = input('Invalid input. Please enter 1 for male, 2 for female: ')
+        gender = input('Enter your gender. M for male, F for female: ').upper()
+        while(gender is not 'M' and gender is not 'F'):
+            gender = input('Invalid input. Please enter M for male, F for female: ')
 
         phone = input('Enter your 10-digit phone number: ')
         while not self.isValidPhoneNumber(phone):
@@ -162,7 +162,20 @@ class Register(Menu):
             return userType, newCompanyDetails
 
 
+class customerDashboard(Menu):
+    '''displayed to a customer after they login'''
+    def display(self):
+        pass
 
+class companyDashboard(Menu):
+    '''displayed to a company after they login'''
+    def display(self):
+        pass
+
+class adminDashboard(Menu):
+    '''displayed to the admin after they login'''
+    def display(self):
+        pass
 #test
 # m = MainMenu()
 # m.display()

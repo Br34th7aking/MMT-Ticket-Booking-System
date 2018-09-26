@@ -1,9 +1,24 @@
 [
   {
+    "username": "admin",
+    "email": "admin@mmt.com",
+    "password": "admin123",
+    "gender": "M",
+    "phone": "9999999999",
+    "memberSince": "2018-09-26",
+    "bookingHistory": ,
+    "cancellationHistory":,
+    "lastTransaction":,
+  }
+  {
     "username": "abhijit",
     "email": "abhijit111@gmail.com",
     "password": "password",
-    "gender": "1",
-    "phone": "1234567890"
+    "gender": "M",
+    "phone": "1234567890",
+    "memberSince": "2018-09-26",
+    "bookingHistory": [],
+    "cancellationHistory": [],
+    "lastTransaction": []
   }
 ]

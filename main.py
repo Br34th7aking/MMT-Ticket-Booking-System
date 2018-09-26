@@ -2,6 +2,8 @@
 # author: abhijit raj
 
 from Menus import *
+from users import *
+from miscellaneous import *
 
 username = '' # no logged user
 password = ''
@@ -26,7 +28,7 @@ elif userChoice is '2':
     registerMenu.display()
     userType, signUpData = registerMenu.signUp()
     if userType == '1':
-        #create a new user and add to customer database
+        #create a new customer and add to customer database
         pass
     elif userType == '2':
         # create a new company and add to company database
