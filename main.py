@@ -53,7 +53,7 @@ if userChoice is '1':
 
         dashboard = CustomerDashboard()
 
-        choices = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+        choices = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
 
         loggedIn = True
         while(loggedIn):
@@ -61,18 +61,23 @@ if userChoice is '1':
             dashboard.display(username)
             choice = dashboard.getUserChoice()
             while choice not in choices:
-                print('Sorry! Enter a valid option(1 to 9).')
+                print('Sorry! Enter a valid option(1 to 10).')
                 choice = dashboard.getUserChoice()
-
-            if choice is '9':
+            if choice == '11':
                 username = ''
                 password = ''
                 print(LOGOS['mainmenu'])
                 print("*" * 50)
                 print('Thank you for using MMT. You have been logged out')
                 loggedIn = False
-            elif choice is '8':
+            elif choice == '10':
+                currentUser.viewUpcomingJourneys()
+                goback = input('Press Enter to go back...')
+            elif choice is '9':
                 currentUser.viewLastTransaction()
+                goback = input('Press Enter to go back...')
+            elif choice is '8':
+                currentUser.cancelTicket()
                 goback = input('Press Enter to go back...')
             elif choice is '7':
                 currentUser.viewCancellationHistory()

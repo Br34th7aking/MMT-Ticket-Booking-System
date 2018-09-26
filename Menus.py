@@ -194,8 +194,10 @@ class CustomerDashboard(Menu):
         print('Enter 5 to change password.')
         print('Enter 6 to view booking history.')
         print('Enter 7 to view cancelled tickets. ')
-        print('Enter 8 to view last transaction.')
-        print('Enter 9 to log out.')
+        print('Enter 8 to cancel a ticket.')
+        print('Enter 9 to view last transaction.')
+        print('Enter 10 to view upcoming journeys.')
+        print('Enter 11 to log out.')
 
     def getUserChoice(self):
         userChoice = input('Your choice: ')
