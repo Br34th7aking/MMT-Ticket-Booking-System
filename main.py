@@ -4,7 +4,7 @@
 from Menus import *
 from users import *
 from miscellaneous import *
-
+from datetime import date
 username = '' # no logged user
 password = ''
 
@@ -29,7 +29,19 @@ elif userChoice is '2':
     userType, signUpData = registerMenu.signUp()
     if userType == '1':
         #create a new customer and add to customer database
-        pass
+        username = signUpData[0]
+        email = signUpData[1]
+        password = signUpData[2]
+        gender = signUpData[3]
+        phone = signUpData[4]
+        memberSince = str(date.today())
+        customer = Customer(username, email, password, gender, phone, memberSince)
+        customerDict = customer.createDict()
+        file = open("customerData.json", "r")
+        data = json.load(file)
+        data.append(customerDict)
+        file = open("customerData.json", "w")
+        json.dump(data, file)
     elif userType == '2':
         # create a new company and add to company database
         pass

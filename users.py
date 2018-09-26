@@ -9,9 +9,16 @@ class User(ABC):
 
 class Customer(User):
 
-    def __init__(self, username, email, password, gender, phone, memberSince, bookingHistory=[], \
-    cancellationHistory=[], lastTransaction=[]):
-        pass
+    def __init__(self, username, email, password, gender, phone, memberSince):
+        self.username = username
+        self.email = email
+        self.password = password
+        self.gender = gender
+        self.phone = phone
+        self.memberSince = memberSince
+        self.bookingHistory = []
+        self.cancellationHistory = []
+        self.lastTransaction = []
 
     def viewProfile(self):
         pass
@@ -31,7 +38,9 @@ class Customer(User):
         pass
     def viewCancellationHistory(self):
         pass
-
+    def createDict(self):
+        '''returns a dictionary containing the customer data'''
+        return self.__dict__
 
 
 class Company(User):
@@ -59,3 +68,7 @@ class Admin(User):
         pass
     def addCoupons(self, company):
         pass
+
+#test
+a = Customer('1','1','1','1','1', '1')
+print(a.createDict())

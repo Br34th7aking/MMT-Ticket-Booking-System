@@ -48,18 +48,7 @@ class Ticket():
 
     def details(self):
         ''' returns a dictionary that can be stored in the database '''
-        ticketData = {}
-        ticketData['pnr'] = self.pnr
-        ticketData['ticketType'] = self.getTicketType()
-        ticketData['bookedBy'] = self.bookedBy
-        ticketData['company'] = self.company
-        ticketData['fare'] = self.fare
-        ticketData['source'] = self.source
-        ticketData['destination'] = self.destination
-        ticketData['dateOfJourney'] = self.dateOfJourney
-        ticketData['passengerDetails'] = self.passengerDetails
-
-        return ticketData
+        return self.__dict__
 
 class Coupon:
     pass
