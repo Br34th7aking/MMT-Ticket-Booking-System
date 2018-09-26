@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-
+from logos import LOGOS
 class User(ABC):
     ''' abstract class for user '''
     @abstractmethod
@@ -21,7 +21,15 @@ class Customer(User):
         self.lastTransaction = []
 
     def viewProfile(self):
-        pass
+        print(LOGOS['profile'])
+        print("*" * 50)
+        print('Username: ', self.username)
+        print('Email: ', self.email)
+        print('Gender: ', self.gender)
+        print('Phone: ', self.phone)
+        print('Member Since: ', self.memberSince)
+        # implement how user goes to previous menu
+
     def updateProfile():
         pass
     def bookFlight(self):
@@ -44,8 +52,9 @@ class Customer(User):
 
 
 class Company(User):
-    def __init__(self, companyName, serviceType, helpline, memberSince):
+    def __init__(self, companyName, password, serviceType, helpline, memberSince):
         self.companyName = companyName
+        self.password = password
         self.serviceType = serviceType
         self.helpline = helpline
         self.memberSince = memberSince
@@ -77,4 +86,4 @@ class Admin(User):
 
 #test
 a = Customer('1','1','1','1','1', '1')
-print(a.createDict())
+a.viewProfile()

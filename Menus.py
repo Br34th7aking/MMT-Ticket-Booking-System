@@ -43,9 +43,13 @@ class Login(Menu):
 
     def getLoginDetails(self):
         '''Takes the username and password inputs and returns them '''
+        userType = input('Enter 1 for customer, 2 for company, 3 for admin: ')
+        while userType is not '1' and userType is not '2' and userType is not '3':
+            userType = input('Please select valid user type. 1 for customer, 2 for company, 3 for admin: ')
         username = input('Enter your username: ')
         password = input('Enter your password: ')
-        return username, password
+
+        return username, password, userType
 
 
 class Register(Menu):
@@ -141,6 +145,10 @@ class Register(Menu):
         while self.checkExistingRecord("companyName", companyName, '2'):
             companyName = input('Sorry, that company is already registered in the system. Try another: ').upper()
 
+        password = input('Enter your password(minimum 6 characters): ')
+        while(len(password) < 6):
+            password = input('Weak password. Enter minimum 6 characters: ')
+
         serviceType = input('What travel services do you offer? 1 for air, 2 for bus: ')
         while(serviceType is not '1' and serviceType is not '2'):
             serviceType = input('Invalid input. Please enter 1 for air, 2 for bus: ')
@@ -149,13 +157,13 @@ class Register(Menu):
         elif serviceType is '2':
             serviceType = 'BUS'
         else:
-            serviceType = 'RAIL' # this is fixed for IRCTC only 
+            serviceType = 'RAIL' # this is fixed for IRCTC only
 
         helpline = input('Enter your 10-digit helpline number: ')
         while not self.isValidPhoneNumber(helpline):
             helpline = input('Enter a valid phone number: ')
 
-        return companyName, serviceType, helpline
+        return companyName, password, serviceType, helpline
 
     def signUp(self):
         userType = input('Enter 1 for customer, 2 for company: ')
@@ -172,17 +180,31 @@ class Register(Menu):
             return userType, newCompanyDetails
 
 
-class customerDashboard(Menu):
+class CustomerDashboard(Menu):
     '''displayed to a customer after they login'''
     def display(self):
-        pass
+        print(LOGOS['home'])
+        print('*' * 10 + "Customer Dashboard" + '*' * 10)
+        print('Enter 1 to book a flight.')
+        print('Enter 2 to book a train ticket.')
+        print('Enter 3 to book a bus ticket.')
+        print('Enter 4 to view your profile. ')
+        print('Enter 5 to update profile.')
+        print('Enter 6 to view booking history.')
+        print('Enter 7 to view cancelled tickets. ')
+        print('Enter 8 to view last transaction.')
+        print('Enter 9 to log out.')
 
-class companyDashboard(Menu):
+    def getUserChoice():
+        userChoice = input('Your choice: ')
+        return userChoice
+
+class CompanyDashboard(Menu):
     '''displayed to a company after they login'''
     def display(self):
         pass
 
-class adminDashboard(Menu):
+class AdminDashboard(Menu):
     '''displayed to the admin after they login'''
     def display(self):
         pass

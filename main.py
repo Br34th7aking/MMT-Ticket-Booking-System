@@ -20,7 +20,26 @@ if userChoice is '1':
     # user wants to log in
     loginMenu = Login()
     loginMenu.display()
-    username, password = loginMenu.getLoginDetails()
+    username, password, userType = loginMenu.getLoginDetails()
+    # if user exists, take him to homepage
+    # else ask again
+    loginOk = False
+    if userType is '1' or userType is '2':
+        data = json.load(open('customerData.json', 'r'))
+    else:
+        data = json.load(open('companyData.json', 'r'))
+    while not loginOk:
+        for user in data:
+            if user['username'] == username and user['password'] == password:
+                loginOk = True
+                break
+        if not loginOk:
+            print('Invalid username or password. Try again.')
+            loginMenu.display()
+            username, password, userType = loginMenu.getLoginDetails()
+
+    # this part of code is accessible after user is logged in
+
 
 elif userChoice is '2':
     # user wants to register a new account
@@ -47,10 +66,11 @@ elif userChoice is '2':
     elif userType == '2':
         # create a new company and add to company database
         companyName = signUpData[0]
-        serviceType = signUpData[1]
-        helpline = signUpData[2]
+        password = signUpData[1]
+        serviceType = signUpData[2]
+        helpline = signUpData[3]
         memberSince = str(date.today())
-        company = Company(companyName, serviceType, helpline, memberSince)
+        company = Company(companyName, password, serviceType, helpline, memberSince)
         companyDict = company.createDict()
         file = open("companyData.json", "r")
         data = json.load(file)
