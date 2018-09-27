@@ -26,6 +26,7 @@ class MainMenu(Menu):
         print('1 to login')
         print('2 to register')
         print('3 to read FAQ')
+        print('4 to quit')
 
     def getUserChoice(self):
         '''
@@ -47,6 +48,8 @@ class Login(Menu):
         while userType is not '1' and userType is not '2' and userType is not '3':
             userType = input('Please select valid user type. 1 for customer, 2 for company, 3 for admin: ')
         username = input('Enter your username: ')
+        if userType == '2':
+            username = username.upper() # company usernames are all caps in database
         password = input('Enter your password: ')
 
         return username, password, userType
@@ -205,9 +208,11 @@ class CustomerDashboard(Menu):
 
 class CompanyDashboard(Menu):
     '''displayed to a company after they login'''
-    def display(self):
+    def display(self,username):
         print(LOGOS['home'])
-        print("*" * 50)
+        print('*' * 10 + "Company Dashboard" + '*' * 10)
+        print('\n')
+        print('Hello {}, select one option from below: '.format(username))
         print("Enter 1 to view your profile. ")
         print("Enter 2 to add coupons. ")
         print("Enter 3 to view coupons you currently offer. ")
@@ -218,8 +223,20 @@ class CompanyDashboard(Menu):
         return userChoice
 class AdminDashboard(Menu):
     '''displayed to the admin after they login'''
-    def display(self):
-        pass
+    def display(self, username):
+        print(LOGOS['home'])
+        print('*' * 10 + "Admin Dashboard" + '*' * 10)
+        print('\n')
+        print('Hello {}, select one option from below: '.format(username))
+        print("Enter 1 to see all registered users")
+        print("Enter 2 to see registered companies ")
+        print("Enter 3 to see user details")
+        print("Enter 4 to see company details")
+        print("Enter 5 to add coupons")
+        print("Enter 6 to log out")
+    def getUserChoice(self):
+        userChoice = input('Your choice: ')
+        return userChoice
 #test
 # m = MainMenu()
 # m.display()

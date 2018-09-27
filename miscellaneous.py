@@ -28,20 +28,29 @@ class Flight(Trip):
     def companyAndFare(self):
         data = json.load(open('companyData.json', 'r'))
         listOfCompanies = []
+        discountPercent = 0
         for company in data:
+            discountPercent = 0
             if company['serviceType'] == "AIR":
-                listOfCompanies.append(company['companyName'])
+                if len(company['discountCoupons']) is not 0:
+                    randomCouponNumber = random.randint(0, len(company['discountCoupons'])-1)
+                    discountPercent = company['discountCoupons'][randomCouponNumber]['discount']
+                listOfCompanies.append([company['companyName'], discountPercent])
+
         baseFare = 2000
         companyAndFare = []
         for company in listOfCompanies:
+            companyName = company[0]
+            discountPercent = company[1]
             fare = baseFare + random.randint(1000, 9999)
-            companyAndFare.append([company, fare])
+            fare -= (discountPercent * fare) / 100
+            companyAndFare.append([companyName, fare, discountPercent])
 
         print("Following are the list of companies and ticket prices.")
-        print('%15s %15s' % ("Company", "Fare"))
-        print('%15s %15s' % ("*******", "****"))
+        print('%-15s %-15s %-15s' % ("Company", "Fare", "Discount"))
+        print('%-15s %-15s %-15s' % ("*******", "****", "********"))
         for i in companyAndFare:
-            print("%15s %15s" %(i[0], i[1]))
+            print("%-15s %-15s %-3s %%" %(i[0], i[1], i[2]))
         company = input('Enter your choice(company name): ').upper()
 
         for i in companyAndFare:
@@ -83,20 +92,29 @@ class BusJourney(Trip):
     def companyAndFare(self):
         data = json.load(open('companyData.json', 'r'))
         listOfCompanies = []
+        discountPercent = 0
         for company in data:
+            discountPercent = 0
             if company['serviceType'] == "BUS":
-                listOfCompanies.append(company['companyName'])
-        baseFare = 300
+                if len(company['discountCoupons']) is not 0:
+                    randomCouponNumber = random.randint(0, len(company['discountCoupons'])-1)
+                    discountPercent = company['discountCoupons'][randomCouponNumber]['discount']
+                listOfCompanies.append([company['companyName'], discountPercent])
+
+        baseFare = 200
         companyAndFare = []
         for company in listOfCompanies:
-            fare = baseFare + random.randint(50, 1000)
-            companyAndFare.append([company, fare])
+            companyName = company[0]
+            discountPercent = company[1]
+            fare = baseFare + random.randint(100, 1000)
+            fare -= (discountPercent * fare) / 100
+            companyAndFare.append([companyName, fare, discountPercent])
 
         print("Following are the list of companies and ticket prices.")
-        print('%15s %15s' % ("Company", "Fare"))
-        print('%15s %15s' % ("*******", "****"))
+        print('%-15s %-15s %-15s' % ("Company", "Fare", "Discount"))
+        print('%-15s %-15s %-15s' % ("*******", "****", "********"))
         for i in companyAndFare:
-            print("%15s %15s" %(i[0], i[1]))
+            print("%-15s %-15s %-3s %%" %(i[0], i[1], i[2]))
         company = input('Enter your choice(company name): ').upper()
 
         for i in companyAndFare:
@@ -137,8 +155,19 @@ class TrainJourney(Trip):
         return random.randint(1000000000, 9999999999)  # create a random 10 digit pnr
     def companyAndFare(self):
         company = "IRCTC"
+        data = json.load(open('companyData.json', 'r'))
+        discountPercent = 0
+        for comp in data:
+            if comp['companyName'] == 'IRCTC':
+                if len(comp['discountCoupons']) is not 0:
+                    randomCouponNumber = random.randint(0, len(comp['discountCoupons'])-1)
+                    discountPercent = comp['discountCoupons'][randomCouponNumber]['discount']
+
         baseFare = 500
-        fare = baseFare + random.randint(100, 3000)
+        fare = baseFare + random.randint(100, 5000)
+        fare -= (discountPercent * fare) / 100
+        discountPercent = str(discountPercent)
+        print('You will get a discount of {} %.'.format(discountPercent))
         return company, fare
     def fillPassengerDetails(self):
         numPassengers = int(input('Enter number of passengers: '))
@@ -187,9 +216,14 @@ class Ticket():
         return self.__dict__
 
 class Coupon:
-    pass
+    def __init__(self, couponCode, discount, company, validTillDate):
+        self.couponCode = couponCode
+        self.discount = discount
+        self.company = company
+        self.validTillDate = validTillDate
 
-
+    def getCouponData(self):
+        return self.couponCode, self.discount, self.company, self.validTillDate
 #test
 # t = Ticket(1000, 2, "abhijit", "IRCTC", "200", 'dhanbad', 'daltonganj', "2018-09-26", ['abhijit', 'kajal'])
 # print(t.details())
