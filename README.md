@@ -172,11 +172,13 @@ Class for admin user
 
 ### Trip
 An abstract class for trip data
+
 Methods include:
 **planner()**
 
 ### Flight
 A class for flight booking
+
 Methods include:
 **planner()**
 **generatePNR()**
@@ -185,6 +187,8 @@ Methods include:
 
 ### BusJourney
 A class for booking bus ticket
+
+Methods include:
 **planner()**
 **generatePNR()**
 **companyAndFare()**
@@ -192,6 +196,8 @@ A class for booking bus ticket
 
 ### TrainJourney
 Class for booking train tickets
+
+Methods include:
 **planner()**
 **generatePNR()**
 **companyAndFare()**
@@ -228,3 +234,10 @@ Class to create coupon objects
 
 #### Methods
 **getCouponData()**
+
+
+### LOGO credits
+
+ascii-art-generator
+
+Christopher Johnson
