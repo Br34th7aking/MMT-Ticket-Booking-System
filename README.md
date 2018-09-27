@@ -169,3 +169,62 @@ Class for admin user
 7. **setBookingHistory()**
 8. **setCancellationHistory()**
 9. **setLastTransaction()**
+
+### Trip
+An abstract class for trip data
+Methods include:
+**planner()**
+
+### Flight
+A class for flight booking
+Methods include:
+**planner()**
+**generatePNR()**
+**companyAndFare()**
+**fillPassengerDetails()**
+
+### BusJourney
+A class for booking bus ticket
+**planner()**
+**generatePNR()**
+**companyAndFare()**
+**fillPassengerDetails()**
+
+### TrainJourney
+Class for booking train tickets
+**planner()**
+**generatePNR()**
+**companyAndFare()**
+**fillPassengerDetails()**
+
+### Ticket
+Class to create ticket objects
+
+#### Attributes
+1. pnr
+2. ticketType
+3. company
+4. fare
+5. dateOfJourney
+6. passengerDetails
+7. source
+8. destination
+
+#### Methods
+1. **getDateOfJourney()**
+2. **getPNR()**
+3. **getTicketType()**
+4. **getFare()**
+5. **createDict()**
+
+### Coupon
+Class to create coupon objects
+
+#### Attributes
+1. couponCode
+2. discount
+3. company
+4. validTillDate
+
+#### Methods
+**getCouponData()**
