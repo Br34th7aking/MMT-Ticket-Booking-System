@@ -182,7 +182,7 @@ class TrainJourney(Trip):
             totalPassengers.append(passenger)
         return totalPassengers
 
-class Ticket():
+class Ticket:
     def __init__(self, pnr, ticketType, company, fare, source, destination,\
     dateOfJourney, passengerDetails = []):
         self.pnr = pnr
